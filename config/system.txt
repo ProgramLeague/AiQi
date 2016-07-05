@@ -1,0 +1,10 @@
+Edit_BrainBox=1
+show_YUAN_E=0
+show_YUAN_name=1
+set_E_X=100
+set_try_E_X=30
+Run_Learn=0
+Run_Forgot=0
+AUTO_Question=0
+Feedback_Question=0
+Auto_Load_And_Save_Memory=1

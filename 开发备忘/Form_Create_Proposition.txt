@@ -1,0 +1,485 @@
+
+
+//[形式处理] 建立命题   主体属性连接(法)建立函数    格式： 记住 S谓P  、 记住 S
+int Form_CAiQiDlg::Create_Proposition(CString text) 
+{
+
+  CString DC; //谓语动词
+  
+  if(Find_Text_DC(text, &DC))  //查找文本中的第一个动词，并且返回它
+    {
+     ;
+
+    }
+
+  else   //如果没有动词
+   {
+    return -1;
+   }
+
+
+ CString   S_CString= text; 
+
+ CString L;
+ CString R;
+
+ int L_Words_Sum=0,R_Words_Sum=0;
+
+
+
+
+
+ int a=0,b=0,i=0;
+ float fdz=0;
+
+ YUAN_UNIT *new_YUAN_X=NULL; //符号元X
+ YUAN_UNIT *new_YUAN_Y=NULL; //符号元Y
+ YUAN_UNIT *new_YUAN_G=NULL; //概念元G
+ YUAN_UNIT *new_YUAN_G2=NULL; //概念元G2
+ YUAN_UNIT *new_YUAN_F=NULL; //方法元F
+
+ CString tt,tmpch;
+
+L.Empty();
+R.Empty();
+
+
+  Format_String(&S_CString); //格式化字符串 去掉空格
+
+ //把字符串以 动词 为分割，变成2个字符窜
+ Split_X_String(S_CString,DC,&L,&R); 
+
+
+
+ if(L.IsEmpty() || R.IsEmpty())  //动词前后必须有内容
+   {
+    return -1;
+
+   }
+
+ Format_String(&L); //格式化字符串 去掉空格
+ Format_String(&R); //格式化字符串 去掉空格
+
+ CString TX; //把动词加入左边
+ DC+=" ";
+ TX=DC+R;
+ R=TX;
+
+
+ //得到单词个数
+L_Words_Sum= Return_String_Words_Sum(L); //返回字符串中单词的数量
+R_Words_Sum= Return_String_Words_Sum(R); //返回字符串中单词的数量
+
+////////建立G元 中间（概念）元
+
+//通过WAY检查概念是否存在 防止概念的重复建立
+
+  new_YUAN_G=YUAN->Way_return_P(1,L);
+
+  if(new_YUAN_G == NULL) //不存在
+  {
+
+     YUAN->New();
+     new_YUAN_G=YUAN->ID_return_P(YUAN_ID_X);
+
+     YUAN->Set_xy(new_YUAN_G->ID,Xrand(60,740),Xrand(200,380));
+ 
+
+     YUAN->Set_threshold(new_YUAN_G->ID,60 * L_Words_Sum * 2/3 + (float)Xrand(1,1000)/100 ); //浮动值0.01~10;
+
+     YUAN->Set_Layer(new_YUAN_G->ID,1); //设置为层1
+
+	 YUAN->Set_Way(new_YUAN_G->ID,1,L); //设置元的 输出方法
+
+  }
+
+  else //原来存在
+  {
+
+  }
+
+////////建立G2元 中间（概念）元
+
+//通过WAY检查概念是否存在 防止概念的重复建立
+
+  new_YUAN_G2=YUAN->Way_return_P(1,R);
+
+  if(new_YUAN_G2 == NULL) //不存在
+  {
+
+     YUAN->New();
+     new_YUAN_G2=YUAN->ID_return_P(YUAN_ID_X);
+
+     YUAN->Set_xy(new_YUAN_G2->ID,Xrand(60,740),Xrand(200,380));
+ 
+
+     YUAN->Set_threshold(new_YUAN_G2->ID,60 * L_Words_Sum * 2/3 + (float)Xrand(1,1000)/100 ); //浮动值0.01~10;
+
+     YUAN->Set_Layer(new_YUAN_G2->ID,1); //设置为层1
+
+	 YUAN->Set_Way(new_YUAN_G2->ID,1,R); //设置元的 输出方法
+
+  }
+
+  else //原来存在
+  {
+
+  }
+////////建立F元 输出（方法）元
+
+//通过WAY检查概念是否存在 防止概念的重复建立
+
+  new_YUAN_F=YUAN->Way_return_P(2,R);
+
+  if(new_YUAN_F == NULL) //不存在
+  {
+
+     YUAN->New();
+     new_YUAN_F=YUAN->ID_return_P(YUAN_ID_X);
+
+     YUAN->Set_xy(new_YUAN_F->ID,Xrand(10,740),Xrand(10,100));
+ 
+
+     YUAN->Set_threshold(new_YUAN_F->ID,new_YUAN_F->threshold + (float)Xrand(1,1000)/100 ); //浮动值0.01~10;
+
+     YUAN->Set_Layer(new_YUAN_F->ID,2); //设置为层2
+
+     if(R.IsEmpty())
+	 YUAN->Set_Way(new_YUAN_F->ID,2,"没有"); //设置元的 输出方法
+     else
+         YUAN->Set_Way(new_YUAN_F->ID,2,R); //设置元的 输出方法
+
+  }
+
+  else //原来存在
+  {
+
+  }
+
+
+
+
+
+
+      // 概念元1 连接 方法元
+
+
+        if(YUAN->Find_linker(new_YUAN_G->ID,new_YUAN_F->ID)==0) //原来和目标元没有连接
+		{
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Link(new_YUAN_G->ID,new_YUAN_F->ID,70+fdz);  //连接元
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_G->ID,new_YUAN_F->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_G->ID,new_YUAN_F->ID,10);  //设置连接强度增值或减值
+        }
+
+
+
+      // 概念元2 连接 方法元
+
+
+        if(YUAN->Find_linker(new_YUAN_G2->ID,new_YUAN_F->ID)==0) //原来和目标元没有连接
+		{
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Link(new_YUAN_G2->ID,new_YUAN_F->ID,70+fdz);  //连接元
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_G2->ID,new_YUAN_F->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_G2->ID,new_YUAN_F->ID,10);  //设置连接强度增值或减值
+        }
+
+
+      // 方法元 连接 概念元2 互连
+
+
+        if(YUAN->Find_linker(new_YUAN_F->ID,new_YUAN_G2->ID)==0) //原来和目标元没有连接
+		{
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Link(new_YUAN_F->ID,new_YUAN_G2->ID,70+fdz);  //连接元
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_F->ID,new_YUAN_G2->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_F->ID,new_YUAN_G2->ID,10);  //设置连接强度增值或减值
+        }
+
+
+        if(YUAN->Find_linker(new_YUAN_G2->ID,new_YUAN_F->ID)==0) //原来和目标元没有连接
+		{
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Link(new_YUAN_G2->ID,new_YUAN_F->ID,70+fdz);  //连接元
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_G2->ID,new_YUAN_F->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_G2->ID,new_YUAN_F->ID,10);  //设置连接强度增值或减值
+        }
+
+
+
+////////建立X元 条件（符号）元
+
+i=0;
+tt.Empty();
+tmpch.Empty();
+int end=0;
+
+ while(1) 
+ {
+  if(end==1) break;
+
+
+tt.Empty();
+tmpch.Empty();
+
+  for(;;)  //读取逗号前的文字
+  {
+ 
+   tmpch.Format("%c",L[i]);
+   tt+=tmpch;
+   i++;
+
+
+
+    if(L[i]==' ' || L[i]=='\0') //发现文字 ,
+    {
+
+     a=YUAN->Find_name_return_ID(tt); //查找是否有一样概念的元
+
+
+     if(a==-1) //没有这个元
+	 {
+
+	 //建立新元
+     YUAN->New();
+     new_YUAN_X=YUAN->ID_return_P(YUAN_ID_X);
+
+     YUAN->Set_xy(new_YUAN_X->ID,Xrand(60,740),Xrand(420,600));
+     YUAN->Set_name(new_YUAN_X->ID,tt);
+
+     YUAN->Set_threshold(new_YUAN_X->ID,20 + (float)Xrand(1,1000)/100 ); //浮动值0.01~10;
+
+
+
+	 }
+
+     else //有这个元
+	 {
+
+      new_YUAN_X=YUAN->ID_return_P(a);
+
+	 }
+
+
+////设置连接 X与G 互连
+
+
+
+
+
+        if(YUAN->Find_linker(new_YUAN_X->ID,new_YUAN_G->ID)==0) //原来和目标元没有连接
+		{
+
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+
+        
+          YUAN->Link(new_YUAN_X->ID,new_YUAN_G->ID,60 +fdz);  //连接元 根据个数来调节连接强度
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_X->ID,new_YUAN_G->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_X->ID,new_YUAN_G->ID,20);  //设置连接强度增值或减值
+        }
+
+
+
+        if(YUAN->Find_linker(new_YUAN_G->ID,new_YUAN_X->ID)==0) //原来和目标元没有连接
+		{
+
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+
+        
+          YUAN->Link(new_YUAN_G->ID,new_YUAN_X->ID,60 +fdz);  //连接元 根据个数来调节连接强度
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_G->ID,new_YUAN_X->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_G->ID,new_YUAN_X->ID,20);  //设置连接强度增值或减值
+        }
+
+
+/////////////
+
+
+
+
+
+       if(  L[i]=='\0') //发现结束符
+	   {
+        end=1; break;
+	   }
+
+
+
+    i++; break;
+
+   }
+
+
+
+
+
+
+ }//for
+
+ }//while
+
+
+
+
+
+////////建立Y元 目标（符号）元
+
+ 
+end=0;
+i=0;
+tt.Empty();
+tmpch.Empty();
+
+
+ while(1) 
+ {
+  if(end==1) break;
+
+
+tt.Empty();
+tmpch.Empty();
+
+
+
+  for(;;)  //读取逗号前的文字
+  {
+ 
+   tmpch.Format("%c",R[i]);
+   tt+=tmpch;
+   i++;
+
+
+
+    if(R[i]==' ' || R[i]=='\0') //发现文字 ,
+    {
+
+     a=YUAN->Find_name_return_ID(tt); //查找是否有一样概念的元
+
+
+     if(a==-1) //没有这个元
+	 {
+
+	 //建立新元
+     YUAN->New();
+     new_YUAN_Y=YUAN->ID_return_P(YUAN_ID_X);
+
+     YUAN->Set_xy(new_YUAN_Y->ID,Xrand(10,740),Xrand(420,600));
+     YUAN->Set_name(new_YUAN_Y->ID,tt);
+
+     YUAN->Set_threshold(new_YUAN_Y->ID, 20 + (float)Xrand(1,1000)/100 ); //浮动值0.01~10;
+
+
+
+	 }
+
+     else //有这个元
+	 {
+
+      new_YUAN_Y=YUAN->ID_return_P(a);
+
+	 }
+
+
+////设置连接 Y和G2互连
+
+
+
+
+
+        if(YUAN->Find_linker(new_YUAN_G2->ID,new_YUAN_Y->ID)==0) //原来和方法元没有连接
+		{
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Link(new_YUAN_G2->ID,new_YUAN_Y->ID,30+fdz);  //连接元
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_G2->ID,new_YUAN_Y->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_G2->ID,new_YUAN_Y->ID,10);  //设置连接强度增值或减值
+        }
+
+ 
+        if(YUAN->Find_linker(new_YUAN_Y->ID,new_YUAN_G2->ID)==0) //原来和方法元没有连接
+		{
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Link(new_YUAN_Y->ID,new_YUAN_G2->ID,30+fdz);  //连接元
+
+		}
+
+        else if(YUAN->Find_linker(new_YUAN_Y->ID,new_YUAN_G2->ID)==1)//原来有连接
+        {
+          fdz=(float)Xrand(1,1000)/100;//浮动值0.01~10
+          YUAN->Set_linker_weight_ADD(new_YUAN_Y->ID,new_YUAN_G2->ID,10);  //设置连接强度增值或减值
+        }
+
+ 
+
+/////////////
+
+
+
+
+
+       if(  R[i]=='\0') //发现结束符
+	   {
+        end=1; break;
+	   }
+
+
+
+    i++; break;
+
+   }
+
+
+
+
+
+
+ }//for
+
+ }//while
+
+
+///////////////////////////////
+
+
+
+    return 1;
+
+
+
+}
+

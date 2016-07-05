@@ -1,0 +1,9 @@
+A_time_max=200
+Wait_Start_Time=2
+LE=0.1
+WL=0.6
+fag_add=0.05
+fag_minus=0.02
+E_minus=0.02
+Learn_Ready_Time=30
+Forgot_Weight=0.0002

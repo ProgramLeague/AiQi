@@ -1,0 +1,11 @@
+新增结构
+联系表  Contacts
+
+Contacts_Struct
+
+CONTACTS_UNIT
+
+
+CString text;
+
+text = _T("");

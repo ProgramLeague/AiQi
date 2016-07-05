@@ -1,0 +1,111 @@
+
+◎>>概念意义表里增加脚本命令
+
+2个测试脚本
+打开网站()
+输出文字()
+
+在概念意义表中书写格式：
+<脚本命令>打开网站(www.baidu.com);输出文字(主人，我已经打开了百度);
+
+
+void Run_YUAN_Contacts_Data(CString Data) //运行一条概念单元意义表数据
+{
+
+ //识别意义表数据类型
+
+ if(Data.Find("<是>")!=-1) //是语句输出
+  {
+   Data.Replace( "<是>", "是" );
+   TEXT_OUT_BOX_SAY_3(Data,1); //数据输入 压入数组
+  }
+
+ else if(Data.Find("<脚本命令>")!=-1) //执行脚本命令
+  {
+   Data.Replace( "<脚本命令>", NULL );
+
+   Run_Script(Data);
+
+  }
+
+ else //普通输出
+  {
+   Data.Replace( " ", NULL );
+   TEXT_OUT_BOX_SAY_3(Data,1); //数据输入 压入数组
+  }
+
+
+ 
+
+
+}
+
+
+
+void Run_Script(CString Data) //运行脚本
+{
+
+ int Data_length=Data.GetLength();//字符串的长度
+ CString Command;
+
+ int i=0;
+    //读取一段 ;结束的脚本语句
+   while(1)
+   {
+    Command += Data[i];
+
+    
+    if(Data[i]==';')
+      {
+
+       Command.Replace( ";", NULL );
+
+       Run_Scr_Command(Command); //根据命令选择执行脚本
+
+       Command.Empty();
+
+      }
+
+    if(i>Data_length) break;
+    i++;
+   }
+
+
+}
+
+
+
+void Scr_Command_Out_Text(CString Command)
+{
+   Command.Replace( "输出文字", NULL );
+
+   CString TT;
+   TT="输出文字脚本：" + Command;
+   TEXT_OUT_BOX_SAY_3(TT,1); //数据输入 压入数组
+}
+
+void Scr_Command_Open_Web(CString Command)
+{
+
+   Command.Replace( "打开网站", NULL );
+
+   CString TT;
+   TT="打开网站脚本：" + Command;
+   TEXT_OUT_BOX_SAY_3(TT,1); //数据输入 压入数组
+}
+
+
+
+void Run_Scr_Command(CString Command) //根据命令选择执行脚本
+{
+ if(Command.Find("输出文字") !=-1 )       Scr_Command_Out_Text(Command);
+ else if(Command.Find("打开网站") !=-1 )  Scr_Command_Open_Web(Command);
+
+ else
+  {
+   CString TT;
+   TT="不能这条脚本语句" + Command;
+   TEXT_OUT_BOX_SAY_3(TT,1); //数据输入 压入数组
+  }
+}
+

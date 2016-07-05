@@ -1,0 +1,328 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\AiQi.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""l.CHS\\afxres.rc""      // 标准组件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AiQi.ico"
+IDI_BrainBox            ICON                    "res\\BrainBox.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 220, 137
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 AiQi"
+FONT 10, "微软雅黑", 400, 0, 0x86
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,49,14,20,20
+    LTEXT           "更新日期: 2015/12/22",IDC_STATIC,73,18,77,8,SS_NOPREFIX
+    LTEXT           "作者：智灵设计师",IDC_STATIC,73,29,71,8
+    DEFPUSHBUTTON   "确定",IDOK,84,113,50,14,WS_GROUP
+    LTEXT           "AiQi (爱奇)  Ver1.42",IDC_STATIC,73,7,65,8
+    LTEXT           "了解更多，欢迎加入人工智能QQ讨论群:126471719",IDC_STATIC,29,86,165,10
+    LTEXT           "AiQi是一款人工智能软件,她支持中文自然语言去理解和回答你的问题和输入,她可以进行简单语句记忆和命题逻辑推理，你也可以加载程序目录自带的聊天语料文件，让AiQi变身聊天娱乐机器人！",IDC_STATIC,29,48,165,36
+    GROUPBOX        "",IDC_STATIC,17,38,187,66
+END
+
+IDD_MAIN_DIALOG DIALOGEX 0, 0, 297, 211
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "AiQi 1.42"
+FONT 11, "微软雅黑", 400, 0, 0x86
+BEGIN
+    PUSHBUTTON      "记忆编辑器",IDC_BUTTON_ON_BRAINBOX,207,136,68,14
+    EDITTEXT        IDC_MainDlg_INPUT_EDIT,7,190,147,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "发送",IDC_BUTTON1,156,189,31,15
+    CONTROL         "",IDC_RICHEDIT21,"RichEdit20A",ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | ES_WANTRETURN | WS_BORDER | WS_VSCROLL | WS_TABSTOP,7,7,180,177
+    PUSHBUTTON      "加载聊天语料库",IDC_BUTTON_ON_LOAD_CL,207,153,68,14
+    CONTROL         "Button2",IDC_BUTTON_Setting,"Button",BS_OWNERDRAW,263,194,15,14
+    PUSHBUTTON      "自动学习",IDC_BUTTON_ON_Online_Learning,207,170,68,14
+    CONTROL         140,IDC_BMP_BUTTON_Setting,"Static",SS_BITMAP,265,195,12,12
+    CONTROL         "Button2",IDC_BUTTON_Help,"Button",BS_OWNERDRAW,277,194,15,14
+    CONTROL         1033,IDB_BITMAP_BmpButton_Help,"Static",SS_BITMAP,279,195,12,12
+END
+
+IDD_BRAINBOX_DIALOG DIALOGEX 0, 0, 494, 261
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "记忆编辑器 - BrainBox"
+FONT 10, "微软雅黑", 400, 0, 0x86
+BEGIN
+    DEFPUSHBUTTON   "读取记忆文件",IDC_BUTTON3,418,168,54,14
+    PUSHBUTTON      "保存记忆文件",IDC_BUTTON4,418,188,54,14
+    PUSHBUTTON      "清空记忆",IDC_BUTTON5,418,209,54,14
+    PUSHBUTTON      "编辑概念数据",IDC_BUTTON_SetYuan,419,21,53,23
+    PUSHBUTTON      "编辑连接参数",IDC_BUTTON_SetLinker,419,50,53,14
+    PUSHBUTTON      "删除",IDC_BUTTON_DelYuan,419,117,53,14
+    PUSHBUTTON      "创建一个概念",IDC_BUTTON_NewYuan,419,76,53,14
+    PUSHBUTTON      "激活选中概念",IDC_BUTTON_SetYUANState,419,95,53,14
+    GROUPBOX        "整体操作",IDC_STATIC,414,154,65,76,BS_CENTER
+    GROUPBOX        "单元操作",IDC_STATIC,414,8,65,132,BS_CENTER
+    CONTROL         "显示元活跃值",IDC_BRAINBOX_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,420,244,61,10
+END
+
+IDD_SETTINGS DIALOGEX 0, 0, 220, 123
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "系统设置"
+FONT 11, "微软雅黑", 400, 0, 0x86
+BEGIN
+    PUSHBUTTON      "应用",IDC_BUTTON1,30,89,56,18
+    PUSHBUTTON      "取消",IDC_BUTTON2,136,89,56,18
+    CONTROL         "空闲时向主人提问题",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,31,20,76,10
+    CONTROL         "中文分词功能",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,137,53,64,10
+    CONTROL         "退出时自动保存记忆",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,31,54,104,10
+    CONTROL         "不清楚的时候问答案",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,137,20,76,10
+END
+
+IDD_YuanLinkDlg DIALOGEX 0, 0, 177, 126
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "设置连接参数"
+FONT 10, "宋体", 400, 0, 0x86
+BEGIN
+    DEFPUSHBUTTON   "保存",IDOK,27,102,50,14
+    PUSHBUTTON      "取消",IDCANCEL,101,102,50,14
+    EDITTEXT        IDC_YuanLinkDlg_EDIT1,23,14,114,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+    EDITTEXT        IDC_YuanLinkDlg_EDIT2,23,59,114,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+    LTEXT           "连接强度:",IDC_STATIC,23,36,39,11
+    LTEXT           "连接强度:",IDC_STATIC,23,81,39,11
+    EDITTEXT        IDC_YuanLinkDlg_EDIT3,76,34,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_YuanLinkDlg_EDIT4,77,78,73,14,ES_AUTOHSCROLL
+END
+
+IDD_YuanSetDlg DIALOGEX 0, 0, 242, 321
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "编辑概念数据"
+FONT 11, "宋体", 400, 0, 0x86
+BEGIN
+    DEFPUSHBUTTON   "保存",IDOK,53,288,50,14
+    PUSHBUTTON      "取消",IDCANCEL,125,288,50,14
+    LTEXT           "ID:",IDC_STATIC,16,7,35,10
+    LTEXT           "所属层级:",IDC_STATIC,16,46,38,10
+    LTEXT           "激活阀值:",IDC_STATIC,125,46,34,10
+    LTEXT           "概念名称:",IDC_STATIC,16,25,39,10
+    EDITTEXT        IDC_YuanSetDlg_EDIT1,32,7,40,13,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+    EDITTEXT        IDC_YuanSetDlg_EDIT6,56,43,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_YuanSetDlg_EDIT4,164,43,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_YuanSetDlg_EDIT5,56,22,148,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "新建数据",IDC_BUTTON1,54,242,50,14
+    PUSHBUTTON      "删除数据",IDC_BUTTON3,124,242,50,14
+    GROUPBOX        "概念意义数据表",IDC_STATIC,7,95,228,174
+    CONTROL         "",IDC_LISTBOX_Contacts2,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,16,112,210,120
+    EDITTEXT        IDC_EDIT_X,188,249,40,14,ES_AUTOHSCROLL | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_EDIT1,141,234,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_EDIT3,186,234,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    LTEXT           "表示:",IDC_STATIC,17,68,34,10
+    EDITTEXT        IDC_YuanSetDlg_EDIT7,56,65,40,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,4,2,0
+ PRODUCTVERSION 1,4,2,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "FileDescription", "人工智能程序"
+            VALUE "FileVersion", "1.4.2.0"
+            VALUE "InternalName", "AiQi.exe"
+            VALUE "LegalCopyright", "智灵设计师，保留所有权利。"
+            VALUE "OriginalFilename", "AiQi.exe"
+            VALUE "ProductName", "AiQi"
+            VALUE "ProductVersion", "1.4.2.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_MAIN_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 204
+    END
+
+    IDD_BRAINBOX_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 487
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 254
+    END
+
+    IDD_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 116
+    END
+
+    IDD_YuanLinkDlg, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 119
+    END
+
+    IDD_YuanSetDlg, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 314
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_AiQiDlg_Pic_Face    BITMAP                  "res\\SayBox_Pic_Face.bmp"
+IDB_BMP_YUAN            BITMAP                  "res\\BrainBox_Pic_YUAN.bmp"
+IDB_BITMAP_BmpButton_Setting BITMAP                  "res\\BmpButton_Setting.bmp"
+IDB_BITMAP_BmpButton_Help BITMAP                  "res\\BmpButton_Help.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 AiQi(&A)..."
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\AiQi.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "l.CHS\afxres.rc"      // 标准组件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
